@@ -1,0 +1,12 @@
+{
+    "params":
+        {
+            "local_server": "True",
+            "local_URI": "mysql://root:@localhost/flask_db",
+            "prod_URI": "mysql://root:@localhost/flask_db",
+            "fb_URL": "http://facebook.com",
+            "tw_URL": "http://x.com",
+            "gh_URL": "http://github.com"
+        }
+
+}

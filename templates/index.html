@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Logos</title>
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation-->
+        <div style="align-items: center; margin-left: 100px; margin-top: 10px;">
+            {% set total_logo = posts | length %}
+
+
+            <form action="/" method="get">
+                <strong><a href="/" style="color: #2494f3">Logos Count</a> | {{total_logo}}</strong>
+            <input class="btn" type="search" id="search" name="search"  style="text-align: left; width:600px; border-color:#adb5bd; border-radius: 50px; margin-left:220px; background-color: hsla(0,0%,100%,0.11)">
+            <button class="btn" type="submit" style="border-radius: 50px; border-color:#adb5bd; background-color: hsla(0,0%,100%,0.11); margin-left:5px;">
+                Submit
+            </button>
+            <a href="/"><button class="btn" style="border-radius: 50px; border-color:#adb5bd; background-color: hsla(0,0%,100%,0.11); margin-left:5px;">Reset</button></a>
+            </form>
+        </div>
+        <hr>
+
+
+
+
+
+
+
+
+<style>
+    .hover {
+      /*background-color: hsl(208, 100%, 97%);*/
+      transition: 0.3s;
+      height: 300px;
+      width: 1500px;
+      margin-left: 3px;
+    }
+    .hover:hover {
+      background-color: hsl(233, 75%, 80%, 30%);
+      color: black;
+    }
+    .table-class{
+        background-color: ghostwhite;
+        width: 1500px;
+        border: black;
+        margin-bottom: 10px;
+
+    }
+    .table-class td,tr{
+        color: black;
+        border: 1px solid;
+        border-color: lightgray;
+        height: 25px;
+        padding: 5px 10px;
+        text-align: left;
+        font-size: medium;
+    }
+    .table-class th{
+        background-color: darkgray;
+        color: white;
+        font-style: oblique;
+        border: 1px solid;
+        border-color: lightgray;
+        text-align: center;
+        padding: 15px;
+        border-bottom: 3px solid black;
+    }
+
+
+</style>
+        <!-- Page Header-->
+<!-- Main Content-->
+<div style="width: 1400px; margin-left: 50px;">
+        {% set len = posts | length%}
+        {%set temp_len = len%}
+        {%if page == None %}
+        {%set page = 1 %}
+        {%endif%}
+        {%set page = page | int %}
+        {%set page_no = 1 %}
+        {%set items = 45%}
+        {%if len > items%}
+        {%set len = items %}
+        {% endif %}
+
+        {%set end_point = len* (page) %}
+        {%if end_point > temp_len%}
+        {%set end_point = temp_len%}
+        {%endif %}
+        {%set start_point = (page-1)*len %}
+
+        {%set post_count = 1 %}
+        {% for index in range(start_point, end_point) %}
+        {%set post_count = post_count +1 %}
+
+            <div class="btn" style="padding: 0px; margin-top: 20px;  width: 460px; height: 300px;  border-radius: 10px;  border-color: hsl(208,94%,67%)">
+                <div style="height: 200px;  padding: 5px">
+                <a href="{{posts[index].img}}" target="_blank"><img src="{{posts[index].img}}" style="height: 200px;"></a>
+                </div>
+                <div style="height: 100px; padding: 5px; margin-top: 20px;">
+                <strong style="font-size: large">{{posts[index].name}} </strong>
+                </div>
+
+                </div>
+    {% if post_count == 3 %}
+    <br>
+    <br>
+    {%set post_count = 1 %}
+    {% endif %}
+    {% endfor %}
+</div>
+
+<!-- Pagination-->
+        <div style="margin-left: 355px; margin-top: 20px">
+        <div style="float: left; ">
+
+                {%if start_point > 1 %}
+                    {%set previous = page-1 %}
+                    <a class="button_one" href="/{{previous}}?search={{ request.args.get('search', '') }}">Previous</a>
+<!--                    <a class="button_one" style=" margin-left: 3px; " href="/{{previous}}">{{ previous }}</a >-->
+            {%else%}
+<!--                    <a class="button_one">{{ previous }}</a >-->
+                    <a class="button_one" style=" left: 3px; " >Previous</a>
+                {%endif%}
+            {%if start_point > 1 %}
+                    <a class="button_one" style=" margin-left: 3px; " href="/1?search={{ request.args.get('search', '')}}">First</a> ...
+            {%else%}
+                    <a class="button_one" style=" margin-left: 3px; " >First</a> ...
+                {%endif%}
+
+            {%set total_pages = temp_len/items %}
+            {% set total_pages = total_pages |round(0, 'ceil') %}
+
+
+
+            <a class="button_one" style="  margin-left: 3px; background-color: gray; color: ghostwhite" ><strong>{{page}}</strong></a >
+                {%if page < total_pages%}
+                    <a class="button_one" style=" margin-left: 3px; " href="/{{ page + 1 }}?search={{ request.args.get('search', '') }}">{{ page +1 }}</a >
+<!--                    <a class="button_one" style=" margin-left: 3px; " href="/{{ page +1 }}">{{ page +1 }}</a >-->
+                {%else%}
+                    <a class="button_one" style=" margin-left: 3px; ">-</a >
+            {%endif%}
+                {%if page < total_pages-1%}
+                    <a class="button_one" style=" margin-left: 3px; " href="/{{ page + 2 }}?search={{ request.args.get('search', '')}}">{{ page +2 }}</a >
+                {%else%}
+                    <a class="button_one" style=" margin-left: 3px; ">-</a >
+            {%endif%}
+                {%if page < total_pages-2%}
+                    <a class="button_one" style=" margin-left: 3px; " href="/{{ page + 3 }}?search={{ request.args.get('search', '')}}">{{ page +3 }}</a >
+                {%else%}
+                    <a class="button_one" style=" margin-left: 3px; ">-</a >
+            {%endif%}
+            {%if page < total_pages-3%}
+                    <a class="button_one" style=" margin-left: 3px; " href="/{{ page + 4 }}?search={{ request.args.get('search', '')}}">{{ page +4 }}</a >
+                {%else%}
+                    <a class="button_one" style=" margin-left: 3px; ">-</a >
+            {%endif%}
+            {%if page < total_pages-4%}
+                    <a class="button_one" style=" margin-left: 3px; " href="/{{ page + 5 }}?search={{ request.args.get('search', '')}}">{{ page +5 }}</a >
+                {%else%}
+                    <a class="button_one" style=" margin-left: 3px; ">-</a >
+            {%endif%}
+            {%if page < total_pages-5%}
+                    <a class="button_one" style=" margin-left: 3px; " href="/{{ page + 6 }}?search={{ request.args.get('search', '')}}">{{ page +6 }}</a >
+                {%else%}
+                    <a class="button_one" style=" margin-left: 3px; ">-</a >
+            {%endif%}
+
+        </div>
+            <div style="float: left">
+
+
+                {%if end_point < temp_len %}
+                    {%set next = page + 1 %}
+                     ...<a class="button_one" style=" margin-left: 3px; " href="/{{total_pages | int}}?search={{ request.args.get('search', '')}}">Last</a >
+                    <a class="button_one" style=" margin-left: 8px; float: right" href="/{{next}}?search={{ request.args.get('search', '')}}">Next</a>
+<!--                    <a class="button_one" style=" margin-left: 8px; float: right" href="/{{next}}">{{next}}</a >-->
+                {%else%}
+                     ...<a class="button_one" style=" margin-left: 3px; " >Last</a >
+                    <a class="button_one" style=" margin-left: 8px;  float: right" >Next</a>
+                {%endif%}
+            </div>
+        </div>
+
+    <br>
+    <br>
+<!-- Footer-->
+<footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="{{ params['tw_URL'] }}" target="_blank">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="{{ params['fb_URL'] }}" target="_blank">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="{{ params['gh_URL'] }}" target="_blank">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Logo Collection</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    </body>
+</html>

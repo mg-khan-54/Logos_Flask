@@ -1,0 +1,70 @@
+<!-- Pagination-->
+        <div style="float: left; margin-left: 380px;">
+
+                {%if start_point > 1 %}
+                    {%set previous = page-1 %}
+                    <a class="button_one" href="/manage_posts/{{previous}}">Previous</a>
+<!--                    <a class="button_one" style=" margin-left: 3px; " href="/manage_posts/{{previous}}">{{ previous }}</a >-->
+            {%else%}
+<!--                    <a class="button_one">{{ previous }}</a >-->
+                    <a class="button_one" style=" left: 3px; " >Previous</a>
+                {%endif%}
+            {%if start_point > 1 %}
+                    <a class="button_one" style=" margin-left: 3px; " href="/manage_posts/1">First</a> ...
+            {%else%}
+                    <a class="button_one" style=" margin-left: 3px; " >First</a> ...
+                {%endif%}
+
+
+
+            {%set total_pages = temp_len/10 %}
+            {% set total_pages = total_pages |round(0, 'ceil') %}
+
+
+
+                    <a class="button_one" style="  margin-left: 3px; background-color: orangered" >{{page}}</a >
+                {%if page < total_pages%}
+                    <a class="button_one" style=" margin-left: 3px; " href="/manage_posts/{{ page +1 }}">{{ page +1 }}</a >
+                {%else%}
+                    <a class="button_one" style=" margin-left: 3px; ">-</a >
+            {%endif%}
+                {%if page < total_pages-1%}
+                    <a class="button_one" style=" margin-left: 3px; " href="/manage_posts/{{ page + 2 }}">{{ page +2 }}</a >
+                {%else%}
+                    <a class="button_one" style=" margin-left: 3px; ">-</a >
+            {%endif%}
+                {%if page < total_pages-2%}
+                    <a class="button_one" style=" margin-left: 3px; " href="/manage_posts/{{ page + 3 }}">{{ page +3 }}</a >
+                {%else%}
+                    <a class="button_one" style=" margin-left: 3px; ">-</a >
+            {%endif%}
+            {%if page < total_pages-3%}
+                    <a class="button_one" style=" margin-left: 3px; " href="/manage_posts/{{ page + 4 }}">{{ page +4 }}</a >
+                {%else%}
+                    <a class="button_one" style=" margin-left: 3px; ">-</a >
+            {%endif%}
+            {%if page < total_pages-4%}
+                    <a class="button_one" style=" margin-left: 3px; " href="/manage_posts/{{ page + 5 }}">{{ page +5 }}</a >
+                {%else%}
+                    <a class="button_one" style=" margin-left: 3px; ">-</a >
+            {%endif%}
+            {%if page < total_pages-5%}
+                    <a class="button_one" style=" margin-left: 3px; " href="/manage_posts/{{ page + 6 }}">{{ page +6 }}</a >
+                {%else%}
+                    <a class="button_one" style=" margin-left: 3px; ">-</a >
+            {%endif%}
+
+        </div>
+            <div style="float: left">
+
+
+                {%if end_point < temp_len %}
+                    {%set next = page + 1 %}
+                     ...<a class="button_one" style=" margin-left: 3px; " href="/manage_posts/{{total_pages | int}}">Last</a >
+                    <a class="button_one" style=" margin-left: 8px; float: right" href="/manage_posts/{{next}}">Next</a>
+<!--                    <a class="button_one" style=" margin-left: 8px; float: right" href="/manage_posts/{{next}}">{{next}}</a >-->
+                {%else%}
+                     ...<a class="button_one" style=" margin-left: 3px; " >Last</a >
+                    <a class="button_one" style=" margin-left: 8px;  float: right" >Next</a>
+                {%endif%}
+            </div>
